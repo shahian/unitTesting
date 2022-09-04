@@ -29,8 +29,8 @@ public class GroupController {
         return new ResponseEntity<>(group, HttpStatus.OK);
     }
     @GetMapping(value = "/v1/groupTitle", name = "${service.group.get}")
-    public ResponseEntity<?> getGroupByTitle(@RequestParam String title) {
-        Group group= groupService.getGroupByTitle(title);
+    public ResponseEntity<?> getGroupByTitle() {
+        Group group= groupService.getGroupByTitle("title");
         return new ResponseEntity<>(group, HttpStatus.OK);
     }
 

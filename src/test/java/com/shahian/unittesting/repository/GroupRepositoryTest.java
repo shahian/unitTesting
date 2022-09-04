@@ -46,7 +46,7 @@ public class GroupRepositoryTest {
     }
 
     @Test
-    public void when_findByTitle_thenReturnGroup() {
+    public void when_findByTitle_thenReturnGroup_Repository() {
         //when
         String title = "test";
         Group group = Group.builder()
@@ -74,6 +74,24 @@ public class GroupRepositoryTest {
         groupRepository.save(group);
         //then
         Assertions.assertNotNull(group.getId());
+    }
+
+    @Test
+    public void when_findByTitle_thenReturnGroup_Bootstrapping() {
+        //Given
+        String title = "test";
+        Group group = Group.builder()
+                .title("test")
+                .description("this is a test")
+                .build();
+        entityManager.persist(group);
+        entityManager.flush();
+        //When
+        Optional<Group> group1 = groupRepository.findByTitle(title);
+        //then
+        Assertions.assertTrue(group1.isPresent());
+        Assertions.assertEquals(group1.get().getTitle(),title);
+
     }
 
     @Test
